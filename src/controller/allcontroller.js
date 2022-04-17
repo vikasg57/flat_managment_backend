@@ -16,7 +16,20 @@ const getall=(Model)=>async(req,res) => {
 const block=(Model)=>async(req,res)=>{
     
     try{
-        const respone=await Model.find({block:req.query.block}).lean().exec()
+        const respone=await Model.find({block:req.query.block}).populate({path:"resident_id",select:["name","age","gender"]}).lean().exec()
+        
+        res.status(201).send(respone)
+        
+    }
+    catch(er){
+        
+        res.status(400).send(er.message)
+    }
+}
+const type=(Model)=>async(req,res)=>{
+    
+    try{
+        const respone=await Model.find({type:req.query.type}).populate({path:"resident_id",select:["name","age","gender"]}).lean().exec()
         
         res.status(201).send(respone)
         
@@ -30,8 +43,9 @@ const block=(Model)=>async(req,res)=>{
 const getone=(Model)=>async(req,res) => {
 
     try{
+        console.log(req.params)
     
-        const respone=await Model.findOne({_id:req.params.id}).lean().exec()
+        const respone=await Model.findOne({_id:req.params.id}).populate({path:"resident_id",select:["name","age","gender"]}).lean().exec()
 
         res.status(201).send(respone)
 
@@ -103,6 +117,7 @@ module.exports=(Model)=>{
         sortasc:sortasc(Model),
         sortdsc:sortdsc(Model),
         post:post(Model),
+        type:type(Model)
     }
 
 }

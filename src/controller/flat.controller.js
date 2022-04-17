@@ -19,7 +19,7 @@ router.get("",async(req,res)=>{
     }
 })
 
-router.get("",allcontroller(Flat).getone)
+
 
 router.get("/sort/asc",allcontroller(Flat).sortasc)
 
@@ -27,6 +27,10 @@ router.get("/sort/asc",allcontroller(Flat).sortasc)
 router.get("/sort/dsc",allcontroller(Flat).sortdsc)
 
 router.get("/block",allcontroller(Flat).block)
+
+router.get("/type",allcontroller(Flat).type)
+
+router.get("/:id",allcontroller(Flat).getone)
 
 router.post("",allcontroller(Flat).post)
 
