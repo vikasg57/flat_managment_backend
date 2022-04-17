@@ -1,6 +1,7 @@
 const getall=(Model)=>async(req,res) => {
 
     try{
+      
         const respone=await Model.find().limit(10).lean().exec()
 
         res.status(201).send(respone)
@@ -29,6 +30,7 @@ const block=(Model)=>async(req,res)=>{
 const getone=(Model)=>async(req,res) => {
 
     try{
+    
         const respone=await Model.findOne({_id:req.params.id}).lean().exec()
 
         res.status(201).send(respone)
@@ -43,19 +45,43 @@ const getone=(Model)=>async(req,res) => {
 
 
 
-const sort=(Model)=>async(req,res)=>{
+const sortdsc=(Model)=>async(req,res)=>{
 
     try{
 
-        if(req.query.value==-1){
+        // if(req.query.value==-1){
 
-                const response=await Model.find().sort({price:req.query.value}).limit(10).lean().exec()
+        //         const response=await Model.find().sort({flat_no:req.query.value}).limit(10).lean().exec()
 
-                    res.status(201).send(respone)
+        //             res.status(201).send(response)
 
-        }
+        // }
 
-        const respone=await Model.find().sort({price:req.query.value}).limit(10).lean().exec()
+        const respone=await Model.find().sort({flat_no:-1}).limit(10).lean().exec()
+        
+
+         res.status(201).send(respone)
+
+    }   
+    catch(er){
+       res.status(400).send(er.message);
+    }
+}
+
+
+const sortasc=(Model)=>async(req,res)=>{
+
+    try{
+
+        // if(req.query.value==-1){
+
+        //         const response=await Model.find().sort({flat_no:req.query.value}).limit(10).lean().exec()
+
+        //             res.status(201).send(response)
+
+        // }
+
+        const respone=await Model.find().sort({flat_no:1}).limit(10).lean().exec()
         
 
          res.status(201).send(respone)
@@ -86,7 +112,8 @@ module.exports=(Model)=>{
         block:block(Model),
         getone:getone(Model),
         getall:getall(Model),
-        sort:sort(Model),
+        sortasc:sortasc(Model),
+        sortdsc:sortdsc(Model),
         post:post(Model),
     }
 
