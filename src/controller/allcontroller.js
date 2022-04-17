@@ -49,13 +49,7 @@ const sortdsc=(Model)=>async(req,res)=>{
 
     try{
 
-        // if(req.query.value==-1){
-
-        //         const response=await Model.find().sort({flat_no:req.query.value}).limit(10).lean().exec()
-
-        //             res.status(201).send(response)
-
-        // }
+  
 
         const respone=await Model.find().sort({flat_no:-1}).limit(10).lean().exec()
         
@@ -73,13 +67,7 @@ const sortasc=(Model)=>async(req,res)=>{
 
     try{
 
-        // if(req.query.value==-1){
 
-        //         const response=await Model.find().sort({flat_no:req.query.value}).limit(10).lean().exec()
-
-        //             res.status(201).send(response)
-
-        // }
 
         const respone=await Model.find().sort({flat_no:1}).limit(10).lean().exec()
         
