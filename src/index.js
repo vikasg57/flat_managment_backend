@@ -10,6 +10,11 @@ const cors=require('cors')
 
 const port = process.env.PORT || 6000
 
+const flatcontroller=require("./controller/flat.controller")
+
+const residentcontroller=require("./controller/resident.controller")
+
+
 app.use(express.json())
 
 const corsOptions ={
@@ -19,6 +24,14 @@ const corsOptions ={
 }
 
 app.use(cors(corsOptions))
+
+
+
+app.use("/flat",flatcontroller)
+
+app.use("/resident",residentcontroller)
+
+
 
 
 app.listen(port,async () => {
