@@ -14,7 +14,7 @@ const flatcontroller=require("./controller/flat.controller")
 
 const residentcontroller=require("./controller/resident.controller")
 
-
+let {register,login} = require("./controller/authcontroller");
 app.use(express.json())
 
 const corsOptions ={
@@ -32,7 +32,9 @@ app.use("/flat",flatcontroller)
 app.use("/resident",residentcontroller)
 
 
+app.post("/register", register);
 
+app.post("/login",login);
 
 app.listen(port,async () => {
 
