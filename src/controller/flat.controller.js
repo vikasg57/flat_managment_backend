@@ -49,4 +49,6 @@ router.get("/:id",allcontroller(Flat).getone)
 
 router.post("",allcontroller(Flat).post)
 
+router.delete("/:id",allcontroller(Flat).deletedata)
+
 module.exports =router

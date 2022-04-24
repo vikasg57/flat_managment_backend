@@ -1,3 +1,5 @@
+const { findByIdAndDelete } = require("../models/flat.model");
+
 const getall=(Model)=>async(req,res) => {
 
     try{
@@ -108,6 +110,19 @@ const post=(Model)=>async(req,res)=>{
     }
 }
 
+const deletedata=(Model)=>async(req,res)=>{
+
+    try{
+        const response =await Model.findByIdAndDelete(req.params.id).lean().exec()
+
+        res.status(200).send(response)
+    }
+     catch(er){
+        res.status(400).send(er.message)
+    }
+
+}
+
 module.exports=(Model)=>{
 
     return {
@@ -117,7 +132,8 @@ module.exports=(Model)=>{
         sortasc:sortasc(Model),
         sortdsc:sortdsc(Model),
         post:post(Model),
-        type:type(Model)
+        type:type(Model),
+        deletedata:deletedata(Model),
     }
 
 }
