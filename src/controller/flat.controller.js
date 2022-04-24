@@ -20,7 +20,7 @@ router.get("",async(req,res)=>{
          const totalpages=Math.ceil((await Flat.find().countDocuments())/size)
        
     //    redis.set(`IP`,JSON.stringify(req.ip))
-// console.loga(req.ip)
+    // console.loga(req.ip)
 
 
         

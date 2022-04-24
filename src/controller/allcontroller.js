@@ -2,7 +2,7 @@ const getall=(Model)=>async(req,res) => {
 
     try{
       
-        const respone=await Model.find().limit(10).lean().exec()
+        const respone=await Model.find().lean().exec()
 
         res.status(201).send(respone)
 
