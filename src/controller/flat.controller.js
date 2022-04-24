@@ -7,10 +7,25 @@ const Flat=require('../models/flat.model')
 const allcontroller=require('./allcontroller')
 
 router.get("",async(req,res)=>{
-    try{
-        const response=await Flat.find().populate({path:"resident_id",select:["name","age","gender"]}).lean().exec()
 
-        res.send(response)
+    const page=req.query.page || 1;
+
+    const size =req.query.size || 5;
+
+    const offset= (page - 1) * size;
+
+    try{
+        const response=await Flat.find().populate({path:"resident_id",select:["name","age","gender"]}).skip(offset).limit(size).lean().exec()
+
+         const totalpages=Math.ceil((await Flat.find().countDocuments())/size)
+       
+    //    redis.set(`IP`,JSON.stringify(req.ip))
+// console.loga(req.ip)
+
+
+        
+
+        res.send({response,totalpages})
 
     }
     catch(er){
